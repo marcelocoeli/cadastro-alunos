@@ -2,6 +2,7 @@ import promptSync from 'prompt-sync';
 const prompt = promptSync();
 import fs from 'fs';
 import { quickSort } from './quick-sort-obj.mjs';
+import { gerarAluno } from './teste.mjs';
 let alunos = [];
 
 function exibirAlunos(vetor, reprovados=false){
@@ -137,6 +138,17 @@ do {
         default:
             console.clear();
             console.log("*********************OPÇÃO INVÁLIDA!*********************\n")
+        case "teste":
+            console.clear()
+            console.log("Ambiente criado para gerar uma alunos com valores aleatórios\n")
+            let quantidade = prompt("Digite quantos alunos deseja criar: ")
+            for (let i = 0; i < quantidade; i++) {
+                alunos.push(gerarAluno());
+            }
+            fs.writeFileSync('alunos.json', JSON.stringify(alunos, null, 2), 'utf8');
+            console.log(`${quantidade} alunos criados com Sucesso!\n`)
+            sair = prompt("Pressione ENTER para voltar")
+        break;
       }
 } while (op !== 5);
 console.clear();
